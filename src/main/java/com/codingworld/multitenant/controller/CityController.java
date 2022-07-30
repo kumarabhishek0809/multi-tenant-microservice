@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codingworld.multitenant.entity.City;
 import com.codingworld.multitenant.service.CityService;
 
-@RestController
+@RestController(value = "/api")
 public class CityController {
 
 	@Autowired
@@ -39,15 +38,4 @@ public class CityController {
 		return new ResponseEntity<>(city, HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/getcitybyname/{name}")
-	public ResponseEntity<City> get(@PathVariable(value = "name") String name) {
-		City city = cityService.getByName(name);
-		return new ResponseEntity<>(city, HttpStatus.OK);
-	}
-
-	@DeleteMapping(value = "deletebyname/{name}")
-	public ResponseEntity<City> delete(@PathVariable(value = "name") String name) {
-		cityService.delete(name);
-		return ResponseEntity.ok().build();
-	}
 }
